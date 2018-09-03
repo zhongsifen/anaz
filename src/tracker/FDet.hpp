@@ -19,6 +19,7 @@
 
 #ifndef _TRACKER_FDet_h_
 #define _TRACKER_FDet_h_
+#include <opencv2/objdetect.hpp>
 #include <tracker/IO.hpp>
 namespace FACETRACKER
 {

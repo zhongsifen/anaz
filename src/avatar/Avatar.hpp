@@ -20,6 +20,7 @@
 #ifndef _AVATAR_Avatar_h_
 #define _AVATAR_Avatar_h_
 
+#include <opencv2/imgproc.hpp>
 #include <avatar/IO.hpp>
 namespace AVATAR
 {
@@ -85,16 +86,6 @@ namespace AVATAR
       assert(s.is_open()); this->Write(s, binary); s.close(); 
       return;
     }
-    // void 
-    // Load(const char* fname){ //file containing predictor model
-    //   std::ifstream s(fname); assert(s.is_open()); this->Read(s); s.close(); 
-    //   return;
-    // }
-    // void 
-    // Save(const char* fname){ //file to save predictor model to
-    //   std::ofstream s(fname); assert(s.is_open()); this->Write(s); s.close(); 
-    //   return;
-    // }
   };
   //============================================================================
   /** IO functions */
@@ -103,13 +94,5 @@ namespace AVATAR
   
   void*  //contains pointer to avatar param obj on return, null on failure
   LoadAvatarParams(const char* fname); //file containing avatar params
-  //============================================================================
-
-  std::string DefaultAvatarModelPathname();
-
-  Avatar *LoadAvatar();
-  
-  // std::string DefaultAvatarParamsPathname();
-  // void *LoadAvatarParams();
 }
 #endif

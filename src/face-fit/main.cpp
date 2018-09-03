@@ -22,7 +22,7 @@
 #include "utils/points.hpp"
 #include "tracker/FaceTracker.hpp"
 #include <opencv2/highgui/highgui.hpp>
-
+#include <iostream>
 using namespace FACETRACKER;
 
 void

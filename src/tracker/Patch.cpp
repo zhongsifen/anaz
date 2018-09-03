@@ -18,6 +18,7 @@
 // Copyright CSIRO 2013
 
 #include <tracker/Patch.hpp>
+#include <opencv2/imgproc.hpp>
 #define SGN(x) ((x<0) ? 0:1)
 using namespace FACETRACKER;
 using namespace std;
@@ -245,7 +246,7 @@ void MPatch::Write(ofstream &s, bool binary)
     s.write((char*)&t, sizeof(t));
     s.write((char*)&_w, sizeof(_w));
     s.write((char*)&_h, sizeof(_h));
-    t = _p.size();
+    t = (int)_p.size();
     s.write((char*)&t, sizeof(t));
   }
   //std::cout << _w << " " << _h << " " << _p.size() << std::endl;
@@ -257,10 +258,10 @@ void MPatch::Write(ofstream &s, bool binary)
 //===========================================================================
 void MPatch::Read(ifstream &s,bool readType)
 {
-  int type;
+  int type=0;
   if(readType){s >> type; assert(type == IO::MPATCH);}
   
-  int n; 
+  int n=0;
   if(type == IO::MPATCH)
     s >> _w >> _h >> n;
 

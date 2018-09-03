@@ -19,7 +19,7 @@
 
 #ifndef _TRACKER_Patch_h_
 #define _TRACKER_Patch_h_
-#include <tracker/IO.hpp>
+#include "tracker/IO.hpp"
 namespace FACETRACKER
 {
   //===========================================================================
@@ -63,7 +63,7 @@ namespace FACETRACKER
     MPatch(const char* fname, bool binary = false){this->Load(fname, binary);}
     MPatch(std::vector<Patch> &p){this->Init(p);}
     MPatch& operator=(MPatch const&rhs);
-    inline int nPatch(){return _p.size();}
+    inline int nPatch(){return (int)_p.size();}
     void Load(const char* fname, bool binary = false);
     void Save(const char* fname, bool binary = false);
     void Write(std::ofstream &s, bool binary = false);

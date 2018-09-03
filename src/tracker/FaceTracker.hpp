@@ -19,7 +19,8 @@
 
 #ifndef _TRACKER_FaceTracker_h_
 #define _TRACKER_FaceTracker_h_
-#include <tracker/IO.hpp>
+#include <opencv2/imgproc.hpp>
+#include <fstream>
 namespace FACETRACKER
 {
   //============================================================================
@@ -28,7 +29,7 @@ namespace FACETRACKER
   */
   class fpsTimer{
   public:
-    int64 _t0,_t1,_cummul;  /**< Start and end time        */
+    int64_t _t0,_t1,_cummul;  /**< Start and end time        */
     double _fps;    /**< Current frames per second */
     int _fnum;      /**< Frame number since _t0    */
 
@@ -149,7 +150,7 @@ namespace FACETRACKER
     getShapeParameters()=0;
     //returns _clm._pglobl, the (weak perspective) pose in 3D
     virtual cv::Mat
-    getPoseParameters()=0; 
+    getPoseParameters()=0;
   };
   //============================================================================
   /** IO functions */

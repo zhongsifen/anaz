@@ -4,6 +4,11 @@
 #include "avatar/myAvatar.hpp"
 
 #include <opencv2/highgui/highgui.hpp>
+#include <iostream>
+#include <vector>
+#include <list>
+
+const std::string _resource("/User/zhongsifen/");
 
 void
 print_usage()
@@ -47,17 +52,17 @@ void
 add_to_model(AVATAR::myAvatar *model, const std::string &image_pathname, const std::string &annotation_pathname, const std::string &eyes_pathname)
 {
   cv::Mat image = cv::imread(image_pathname.c_str());
-  if ((image.rows == 0) || (image.cols == 0))
-    throw make_runtime_error("Failed to read image at pathname '%s'", image_pathname.c_str());
+	if ((image.rows == 0) || (image.cols == 0)) return;
+//    throw make_runtime_error("Failed to read image at pathname '%s'", image_pathname.c_str());
 
   std::vector<cv::Point_<double> > points = load_points(annotation_pathname.c_str());
 
   assert(0 == (model->_pdm._M.rows % 3));
   const int expected_number_of_annotations = (model->_pdm._M.rows/3);
-  if (points.size() != (size_t)expected_number_of_annotations)
-    throw make_runtime_error("Insufficient number of annotations of avatar. Expected %d, but got %d.\n",
-			     expected_number_of_annotations,
-			     points.size());
+	if (points.size() != (size_t)expected_number_of_annotations) return;
+//    throw make_runtime_error("Insufficient number of annotations of avatar. Expected %d, but got %d.\n",
+//			     expected_number_of_annotations,
+//			     points.size());
 
   cv::Mat_<double> saragih_points = vectorise_points(points);			     
   
@@ -85,7 +90,7 @@ produce_model(const std::string &output_pathname,
   // it and then write it to file. HACK CITY !! 
   // 
   // Aww man this is so crap. +1 for grey hair.
-  AVATAR::Avatar *abstract_model = AVATAR::LoadAvatar(); 
+  AVATAR::Avatar *abstract_model = AVATAR::LoadAvatar(_resource + "CI2CV.avatar.binary");
   AVATAR::myAvatar *model = dynamic_cast<AVATAR::myAvatar *>(abstract_model);
   assert(model);
 

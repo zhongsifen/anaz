@@ -17,8 +17,6 @@
 
 // Copyright CSIRO 2013
 
-#include "utils/helpers.hpp"
-#include <avatar/Config.h>
 #include <avatar/myAvatar.hpp>
 using namespace AVATAR;
 using namespace std;
@@ -33,8 +31,8 @@ Avatar* AVATAR::LoadAvatar(const char* fname)
 {
   int type; Avatar* model=NULL;
   ifstream file(fname);
-  if (!file.is_open()) 
-    throw make_runtime_error("Avatar model file '%s' does not exist.", fname);
+  if (!file.is_open()) return NULL;
+//    throw make_runtime_error("Avatar model file '%s' does not exist.", fname);
 
   file.read(reinterpret_cast<char*>(&type), sizeof(type));
   file.close();
@@ -44,8 +42,8 @@ Avatar* AVATAR::LoadAvatar(const char* fname)
     break;
   default:    
     file.open(fname,std::ios::binary);
-    if (!file.is_open()) 
-      throw make_runtime_error("Avatar model file '%s' no longer exists.", fname);
+    if (!file.is_open()) return NULL;
+//      throw make_runtime_error("Avatar model file '%s' no longer exists.", fname);
 
     file.read(reinterpret_cast<char*>(&type), sizeof(type));
     file.close();
@@ -62,8 +60,8 @@ void* AVATAR::LoadAvatarParams(const char* fname)
 {
   int type; void* model = NULL;
   ifstream file(fname);
-  if (!file.is_open())
-    throw make_runtime_error("Avatar parameters file '%s' does not exist.");
+  if (!file.is_open()) return NULL;
+//    throw make_runtime_error("Avatar parameters file '%s' does not exist.");
 
   file >> type;
   file.close();
@@ -74,8 +72,8 @@ void* AVATAR::LoadAvatarParams(const char* fname)
     break;
   default:    
     file.open(fname,std::ios::binary);
-    if (!file.is_open())
-      throw make_runtime_error("Avatar parameters file '%s' no longer exists.", fname);
+    if (!file.is_open()) return NULL;
+//      throw make_runtime_error("Avatar parameters file '%s' no longer exists.", fname);
 
     file.read(reinterpret_cast<char*>(&type), sizeof(type));
     file.close();
@@ -86,22 +84,6 @@ void* AVATAR::LoadAvatarParams(const char* fname)
 	     __FILE__,__LINE__,type);
   }
   return model;
-}
-//============================================================================
-std::string
-AVATAR::DefaultAvatarModelPathname()
-{
-  char *v = getenv("CSIRO_AVATAR_MODEL_PATHNAME");
-  if (v)
-    return v;
-  else
-    return AVATAR_DEFAULT_MODEL_PATHNAME;
-}
-//============================================================================
-Avatar *
-AVATAR::LoadAvatar()
-{
-  return LoadAvatar(DefaultAvatarModelPathname().c_str());
 }
 /*
 This stuff isn't needed at present.

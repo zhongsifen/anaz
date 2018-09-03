@@ -18,9 +18,10 @@
 // Copyright CSIRO 2013
 
 #include <tracker/FaceTracker.hpp>
-#ifdef _WITH_AVATAR_
+#include <tracker/IO.hpp>
+//#ifdef _WITH_AVATAR_
 #include <avatar/Avatar.hpp>
-#endif
+//#endif
 #include <opencv2/highgui/highgui.hpp>
 #include <iostream>
 #include <fstream>
@@ -58,10 +59,10 @@ void draw_health(cv::Mat &I,int health)
 //==============================================================================
 int main(int argc, char *argv[])
 {
-  cv::Mat con = FACETRACKER::IO::LoadCon("src/tracker/resources/face.con");
-  FACETRACKER::FaceTrackerParams* p = FACETRACKER::LoadFaceTrackerParams("src/tracker/resources/face.mytrackerparams.binary");
+  cv::Mat con = FACETRACKER::IO::LoadCon("../../../src/tracker/resources/face.con");
+  FACETRACKER::FaceTrackerParams* p = FACETRACKER::LoadFaceTrackerParams("../../../src/tracker/resources/face.mytrackerparams.binary");
   FACETRACKER::FaceTracker* tracker = 
-    FACETRACKER::LoadFaceTracker("src/tracker/resources/face.mytracker.binary");
+    FACETRACKER::LoadFaceTracker("../../../src/tracker/resources/face.mytracker.binary");
   // FACETRACKER::LoadFaceTracker("test_data/face.mytracker.binary.noPRA");
   assert((p != NULL) && "FaceTracker parameters can't be NULL - Check file is correct");
   assert((tracker != NULL) && "tracker not initialised - check file is OK");
@@ -78,7 +79,7 @@ int main(int argc, char *argv[])
   
 #ifdef _WITH_AVATAR_
   AVATAR::Avatar* avatar = 
-    AVATAR::LoadAvatar("src/avatar/resources/CI2CV.avatar.binary");
+    AVATAR::LoadAvatar("../../../src/avatar/resources/CI2CV.avatar.binary");
     //AVATAR::LoadAvatar("test_data/kabuki2.avatar.binary");
   assert(avatar != NULL);
   int idx = 0;
@@ -160,7 +161,7 @@ int main(int argc, char *argv[])
     cv::Mat im; camera >> im; 
     if(im.empty()) break;
     
-    cv::flip(im,im,1);
+    //cv::flip(im,im,1);
     //im = im.t();
 
     if(draw.rows != im.rows){
