@@ -90,7 +90,7 @@ produce_model(const std::string &output_pathname,
   // it and then write it to file. HACK CITY !! 
   // 
   // Aww man this is so crap. +1 for grey hair.
-  AVATAR::Avatar *abstract_model = AVATAR::LoadAvatar(_resource + "CI2CV.avatar.binary");
+  AVATAR::Avatar *abstract_model = AVATAR::LoadAvatar((_resource + "CI2CV.avatar.binary").c_str());
   AVATAR::myAvatar *model = dynamic_cast<AVATAR::myAvatar *>(abstract_model);
   assert(model);
 

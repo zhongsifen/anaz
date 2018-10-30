@@ -20,7 +20,7 @@
 #include <avatar/Avatar.hpp>
 #include <tracker/FaceTracker.hpp>
 #include <tracker/myFaceTracker.hpp>
-#include <opencv/highgui.h>
+#include <opencv2/opencv.hpp>
 #include <iostream>
 #include <fstream>
 
