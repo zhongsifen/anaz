@@ -19,9 +19,7 @@
 
 #include <tracker/FaceTracker.hpp>
 #include <tracker/IO.hpp>
-//#ifdef _WITH_AVATAR_
 #include <avatar/Avatar.hpp>
-//#endif
 #include <opencv2/highgui/highgui.hpp>
 #include <iostream>
 #include <fstream>
@@ -161,9 +159,6 @@ int main(int argc, char *argv[])
     cv::Mat im; camera >> im; 
     if(im.empty()) break;
     
-    //cv::flip(im,im,1);
-    //im = im.t();
-
     if(draw.rows != im.rows){
       int extend = 1;
 #ifdef _WITH_AVATAR_

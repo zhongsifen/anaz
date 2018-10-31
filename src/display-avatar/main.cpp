@@ -78,9 +78,6 @@ run_program(int argc, char **argv)
     }
   }
 
-//  if (!have_argument_p(model_pathname))
-//    model_pathname = AVATAR::DefaultAvatarModelPathname();
-
   if (!file_exists_p(model_pathname->c_str()))
     throw make_runtime_error("Model file '%s' does not exist",
 			     model_pathname->c_str());

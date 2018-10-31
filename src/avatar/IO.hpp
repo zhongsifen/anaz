@@ -19,7 +19,6 @@
 
 #ifndef _AVATAR_IO_h_
 #define _AVATAR_IO_h_
-//#include <opencv/cv.h>
 #include <fstream>
 #include <vector>
 namespace AVATAR

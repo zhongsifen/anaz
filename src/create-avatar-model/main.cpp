@@ -5,8 +5,6 @@
 
 #include <opencv2/highgui/highgui.hpp>
 #include <iostream>
-#include <vector>
-#include <list>
 
 const std::string _resource("/User/zhongsifen/");
 
@@ -52,17 +50,15 @@ void
 add_to_model(AVATAR::myAvatar *model, const std::string &image_pathname, const std::string &annotation_pathname, const std::string &eyes_pathname)
 {
   cv::Mat image = cv::imread(image_pathname.c_str());
-	if ((image.rows == 0) || (image.cols == 0)) return;
-//    throw make_runtime_error("Failed to read image at pathname '%s'", image_pathname.c_str());
+	if ((image.rows == 0) || (image.cols == 0))
+		return;
 
   std::vector<cv::Point_<double> > points = load_points(annotation_pathname.c_str());
 
   assert(0 == (model->_pdm._M.rows % 3));
   const int expected_number_of_annotations = (model->_pdm._M.rows/3);
-	if (points.size() != (size_t)expected_number_of_annotations) return;
-//    throw make_runtime_error("Insufficient number of annotations of avatar. Expected %d, but got %d.\n",
-//			     expected_number_of_annotations,
-//			     points.size());
+	if (points.size() != (size_t)expected_number_of_annotations)
+		return;
 
   cv::Mat_<double> saragih_points = vectorise_points(points);			     
   
@@ -81,10 +77,10 @@ produce_model(const std::string &output_pathname,
 	      const std::list<std::string> &eyes)
 {
   if (images.size() != annotations.size())
-    throw make_runtime_error("Number of images and the number of annotations do not match.");
+	  return -1;
 
   if (images.size() != eyes.size())
-    throw make_runtime_error("Number of images and the number of eye annotations do not match.");
+	  return -1;
 
   // We cannot allocate a clean model, so take an existing one, empty
   // it and then write it to file. HACK CITY !! 

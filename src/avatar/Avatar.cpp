@@ -31,8 +31,8 @@ Avatar* AVATAR::LoadAvatar(const char* fname)
 {
   int type; Avatar* model=NULL;
   ifstream file(fname);
-  if (!file.is_open()) return NULL;
-//    throw make_runtime_error("Avatar model file '%s' does not exist.", fname);
+  if (!file.is_open())
+	  return NULL;
 
   file.read(reinterpret_cast<char*>(&type), sizeof(type));
   file.close();
@@ -42,8 +42,8 @@ Avatar* AVATAR::LoadAvatar(const char* fname)
     break;
   default:    
     file.open(fname,std::ios::binary);
-    if (!file.is_open()) return NULL;
-//      throw make_runtime_error("Avatar model file '%s' no longer exists.", fname);
+    if (!file.is_open())
+		return NULL;
 
     file.read(reinterpret_cast<char*>(&type), sizeof(type));
     file.close();
@@ -60,8 +60,8 @@ void* AVATAR::LoadAvatarParams(const char* fname)
 {
   int type; void* model = NULL;
   ifstream file(fname);
-  if (!file.is_open()) return NULL;
-//    throw make_runtime_error("Avatar parameters file '%s' does not exist.");
+  if (!file.is_open())
+	  return NULL;
 
   file >> type;
   file.close();
@@ -72,8 +72,8 @@ void* AVATAR::LoadAvatarParams(const char* fname)
     break;
   default:    
     file.open(fname,std::ios::binary);
-    if (!file.is_open()) return NULL;
-//      throw make_runtime_error("Avatar parameters file '%s' no longer exists.", fname);
+    if (!file.is_open())
+		return NULL;
 
     file.read(reinterpret_cast<char*>(&type), sizeof(type));
     file.close();
@@ -85,22 +85,3 @@ void* AVATAR::LoadAvatarParams(const char* fname)
   }
   return model;
 }
-/*
-This stuff isn't needed at present.
-//============================================================================
-std::string
-AVATAR::DefaultAvatarParamsPathname()
-{
-  char *v = getenv("CSIRO_AVATAR_PARAMS_PATHNAME");
-  if (v)
-    return v;
-  else
-    return AVATAR_DEFAULT_PARAMS_PATHNAME;
-}
-//============================================================================
-void *
-AVATAR::LoadAvatarParams()
-{
-  return LoadAvatarParams(DefaultAvatarParamsPathname());
-}
-*/

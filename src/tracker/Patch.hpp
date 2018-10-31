@@ -19,7 +19,7 @@
 
 #ifndef _TRACKER_Patch_h_
 #define _TRACKER_Patch_h_
-#include "tracker/IO.hpp"
+#include <tracker/IO.hpp>
 namespace FACETRACKER
 {
   //===========================================================================
