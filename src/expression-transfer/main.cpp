@@ -87,7 +87,7 @@ run_program(int argc, char **argv)
   CommandLineArgument<std::string> output_argument;
 
   Configuration cfg;  
-  cfg.model_pathname = AVATAR::DefaultAvatarModelPathname();
+//  cfg.model_pathname = AVATAR::DefaultAvatarModelPathname();
   cfg.model_index = 0;
   cfg.background_colour = cv::Vec<uint8_t,3>(0,0,0);
   cfg.overlay = false;
@@ -209,8 +209,8 @@ run_program(int argc, char **argv)
   
     if (image_exists_p && landmarks_exists_p) {
       cv::Mat image_unknown = cv::imread(image_it->c_str());
-      if (image_unknown.type() != cv::DataType<cv::Vec<uint8_t,3> >::type)	
-	throw make_runtime_error("This program only knows draw on 3 channel colour images. The file '%s' just doesn't satisfy this requirement. Sorry.", image_it->c_str());
+      if (image_unknown.channels() != 3)
+		  return -1;
 
       cv::Mat_<cv::Vec<uint8_t,3> > image  = image_unknown;
       std::vector<cv::Point_<double> > pts = load_points(landmarks_it->c_str());
